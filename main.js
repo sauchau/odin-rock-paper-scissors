@@ -1,7 +1,7 @@
 function getComputerChoice() {
-    moves = new Array("Rock", "Paper", "Scissor");
+    const moves = new Array("Rock", "Paper", "Scissor");
     // All this...for a drop of blood
-    randomComputerMove = moves[Math.floor(Math.random() * moves.length)];
+    const randomComputerMove = moves[Math.floor(Math.random() * moves.length)];
 
     return randomComputerMove;
 }
