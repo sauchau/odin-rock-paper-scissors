@@ -42,3 +42,39 @@ function playRound(playerSelection, computerSelection) {
 
     return {roundResult: roundResult, roundEndMessage: roundEndMessage};
 }
+
+function game(numRounds=5) {
+    let playerScore = 0;
+    let computerScore = 0;
+
+    console.log("Game has started! Please enter a move in the prompt.");
+    console.log("-".repeat(50));
+
+    for (let i = 1; i <= numRounds; i++) {
+        playerSelection = capitalize(prompt("What move do you want to play? Write down Rock, Paper or Scissor."));
+        computerSelection = getComputerChoice();
+        
+        console.log(`Player showed ${playerSelection}.`);
+        console.log(`Computer showed ${computerSelection}.`);
+
+        roundResults = playRound(playerSelection, computerSelection);
+        switch (roundResults["roundResult"]) {
+            case "Win":
+                playerScore++;
+                break;
+            case "Lose":
+                computerScore++;
+                break;
+            default:
+                break;
+        }
+
+        console.log(roundResults["roundEndMessage"]);
+        console.log(`Current Scores:\nPlayer Score - ${playerScore}\nComputer Score - ${computerScore}`);
+        console.log("-".repeat(50));
+    }
+
+    console.log("-".repeat(50));
+    console.log("Game Finished!")
+    console.log(`Final Scores:\nPlayer Score - ${playerScore}\nComputer Score - ${computerScore}`)
+}
