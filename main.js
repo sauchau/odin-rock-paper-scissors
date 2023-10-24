@@ -1,5 +1,6 @@
+const moves = new Array("Rock", "Paper", "Scissor");
+
 function getComputerChoice() {
-    const moves = new Array("Rock", "Paper", "Scissor");
     // All this...for a drop of blood
     const randomComputerMove = moves[Math.floor(Math.random() * moves.length)];
 
