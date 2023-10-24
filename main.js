@@ -25,17 +25,20 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    const winText = `You Win! ${playerSelection} beats ${computerSelection}`;
-    const drawText = `Draw! Both played the same move`;
-    const loseText = `You Lose! ${computerSelection} beats ${playerSelection}`;
+    let roundResult, roundEndMessage;
     
     if ((playerSelection == "Rock" && computerSelection == "Scissor") ||
      (playerSelection == "Paper" && computerSelection == "Rock") ||
      (playerSelection == "Scissor" && computerSelection == "Paper")) {
-        return winText;
+        roundResult = "Win";
+        roundEndMessage = `You Win! ${playerSelection} beats ${computerSelection}`;
     } else if (playerSelection == computerSelection) {
-        return drawText;
+        roundResult = "Draw";
+        roundEndMessage = `Draw! Both played the same move`;
+    } else {
+        roundResult = "Lose";
+        roundEndMessage = `You Lose! ${computerSelection} beats ${playerSelection}`;
     }
 
-    return loseText;
+    return {roundResult: roundResult, roundEndMessage: roundEndMessage};
 }
