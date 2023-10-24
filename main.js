@@ -1,5 +1,9 @@
 const moves = new Array("Rock", "Paper", "Scissor");
 
+function isValidMove(move) {
+    return moves.includes(move);
+}
+
 function getComputerChoice() {
     // All this...for a drop of blood
     const randomComputerMove = moves[Math.floor(Math.random() * moves.length)];
