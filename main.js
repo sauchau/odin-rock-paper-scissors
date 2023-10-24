@@ -1,7 +1,7 @@
 const moves = new Array("Rock", "Paper", "Scissor");
 
 function capitalize(inp) {
-    res = ""
+    let res = ""
     for (let i = 0; i<inp.length; i++) {
         if (i == 0) {
             res += inp[i].toUpperCase();
