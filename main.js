@@ -1,5 +1,18 @@
 const moves = new Array("Rock", "Paper", "Scissor");
 
+function capitalize(inp) {
+    res = ""
+    for (let i = 0; i<inp.length; i++) {
+        if (i == 0) {
+            res += inp[i].toUpperCase();
+        } else {
+            res += inp[i].toLowerCase();
+        }
+    }
+
+    return res;
+}
+
 function isValidMove(move) {
     return moves.includes(move);
 }
