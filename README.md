@@ -1,11 +1,6 @@
 # odin-rock-paper-scissors
 
-Just a console game.
-<br>
-To play,
-1. Open index.html on your web browser.
-2. Go to console on your web browser and type 
-```
-    game()
-```
-3. Then, Follow the instructions.
+Just a Simple Rock Paper Scissor game.
+- Click on Play to start the game.
+- Game over when one player reaches 5 points.
+- Refresh the page to play again. Sorry.

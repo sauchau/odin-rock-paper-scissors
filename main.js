@@ -1,5 +1,4 @@
 const instructions = document.querySelector("#instructions");
-// const playArea = document.querySelector("#play-area");
 const startButton = document.querySelector("#start-btn");
 const movesContainer = document.querySelector("#moves-container");
 const movesPlayed = document.querySelector("#moves-played");
