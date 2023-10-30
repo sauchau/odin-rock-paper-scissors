@@ -1,23 +1,19 @@
-const moves = new Array("Rock", "Paper", "Scissor");
+const instructions = document.querySelector("#instructions");
+// const playArea = document.querySelector("#play-area");
+const startButton = document.querySelector("#start-btn");
+const movesContainer = document.querySelector("#moves-container");
+const movesPlayed = document.querySelector("#moves-played");
+const playerScoreDom = document.querySelector("#player-score");
+const computerScoreDom = document.querySelector("#computer-score");
 
-function capitalize(inp) {
-    let res = ""
-    for (let i = 0; i<inp.length; i++) {
-        if (i == 0) {
-            res += inp[i].toUpperCase();
-        } else {
-            res += inp[i].toLowerCase();
-        }
-    }
-
-    return res;
-}
-
-function isValidMove(move) {
-    return moves.includes(move);
-}
+// hide the game UI until the game is started
+movesContainer.style.display = "none";
+movesPlayed.style.display = "none";
+playerScoreDom.style.display = "none";
+computerScoreDom.style.display = "none";
 
 function getComputerChoice() {
+    const moves = new Array("Rock", "Paper", "Scissor");
     // All this...for a drop of blood
     const randomComputerMove = moves[Math.floor(Math.random() * moves.length)];
 
@@ -25,56 +21,56 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let roundResult, roundEndMessage;
-    
-    if ((playerSelection == "Rock" && computerSelection == "Scissor") ||
-     (playerSelection == "Paper" && computerSelection == "Rock") ||
-     (playerSelection == "Scissor" && computerSelection == "Paper")) {
-        roundResult = "Win";
-        roundEndMessage = `You Win! ${playerSelection} beats ${computerSelection}`;
+    if ((playerSelection === "Rock" && computerSelection === "Scissor") ||
+     (playerSelection === "Paper" && computerSelection === "Rock") ||
+     (playerSelection === "Scissor" && computerSelection === "Paper")) {
+        return "Win";
     } else if (playerSelection == computerSelection) {
-        roundResult = "Draw";
-        roundEndMessage = `Draw! Both played the same move`;
+        return "Draw";
     } else {
-        roundResult = "Lose";
-        roundEndMessage = `You Lose! ${computerSelection} beats ${playerSelection}`;
+        return "Lose";
     }
-
-    return {roundResult: roundResult, roundEndMessage: roundEndMessage};
 }
 
-function game(numRounds=5) {
-    let playerScore = 0;
-    let computerScore = 0;
+function startGame() {
+    startButton.style.display = "none";
+    movesContainer.style.display = "block";
+    movesPlayed.style.display = "block";
+    playerScoreDom.style.display = "block";
+    computerScoreDom.style.display = "block";
 
-    console.log("Game has started! Please enter a move in the prompt.");
-    console.log("-".repeat(50));
+    instructions.textContent = "Game has started! Please select a move.";
+}
 
-    for (let i = 1; i <= numRounds; i++) {
-        playerSelection = capitalize(prompt("What move do you want to play? Write down Rock, Paper or Scissor."));
-        computerSelection = getComputerChoice();
-        
-        console.log(`Player showed ${playerSelection}.`);
-        console.log(`Computer showed ${computerSelection}.`);
+let playerScore = 0;
+let computerScore = 0;
 
-        roundResults = playRound(playerSelection, computerSelection);
-        switch (roundResults["roundResult"]) {
-            case "Win":
-                playerScore++;
-                break;
-            case "Lose":
-                computerScore++;
-                break;
-            default:
-                break;
-        }
+startButton.addEventListener('click', startGame);
 
-        console.log(roundResults["roundEndMessage"]);
-        console.log(`Current Scores:\nPlayer Score - ${playerScore}\nComputer Score - ${computerScore}`);
-        console.log("-".repeat(50));
+movesContainer.addEventListener('click', (e) => {
+    const playerSelection = e.target.textContent;
+    const computerSelection = getComputerChoice();
+    
+    movesPlayed.textContent = `You played ${playerSelection} and computer played ${computerSelection}`
+
+    roundResult = playRound(playerSelection, computerSelection);
+    switch (roundResult) {
+        case "Win":
+            playerScore++;
+            break;
+        case "Lose":
+            computerScore++;
+            break;
+        default:
+            break;
     }
 
-    console.log("-".repeat(50));
-    console.log("Game Finished!")
-    console.log(`Final Scores:\nPlayer Score - ${playerScore}\nComputer Score - ${computerScore}`)
-}
+    playerScoreDom.textContent = `Player Score: ${playerScore}`;
+    computerScoreDom.textContent = `Player Score: ${computerScore}`;
+
+    if (playerScore === 5) {
+        instructions.textContent = "Player has Won! Refresh the page to play again.";
+    } else if (computerScore === 5) {
+        instructions.textContent = "Computer has Won! Refresh the page to play again.";
+    }
+});
